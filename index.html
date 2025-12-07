@@ -8,7 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        /* Loading Screen */
+        /* Loading Screen dengan Video Panzoid */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -16,34 +16,76 @@
             width: 100%;
             height: 100%;
             background-color: #000;
-            color: #fff;
             z-index: 9999;
-            overflow: hidden;
-        }
-
-        .banner {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            overflow: hidden;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
             position: relative;
         }
 
-        .banner .content .title {
-            font-family: Arial, sans-serif;
-            font-size: 9em;
-            font-weight: bold;
-            text-align: center;
-            color: white;
+        #panzoidVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.9) contrast(1.1) saturate(1.2);
         }
 
-        .mask-element {
+        /* Fallback jika video tidak bisa diputar */
+        .fallback-content {
+            display: none;
             position: absolute;
-            inset: 0;
-            background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .fallback-title {
+            font-family: Arial, sans-serif;
+            font-size: 5rem;
+            font-weight: bold;
+            color: #f97316;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
+            animation: fallbackPulse 2s infinite;
+        }
+
+        .fallback-loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(249, 115, 22, 0.3);
+            border-top-color: #f97316;
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: fallbackSpin 1s linear infinite;
+        }
+
+        .loading-progress {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-family: monospace;
+            z-index: 10;
+            display: none;
+        }
+
+        @keyframes fallbackPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes fallbackSpin {
+            to { transform: rotate(360deg); }
         }
 
         /* Sembunyikan konten utama saat loading */
@@ -335,13 +377,13 @@
 
          .form-select {
             padding: 10px;
-            background: rgba(0, 0, 0, 0.8) !important; /* Background hitam */
+            background: rgba(0, 0, 0, 0.8) !important;
             border: 1px solid var(--border);
             border-radius: 6px;
             color: var(--light) !important;
             font-size: 0.9rem;
             transition: border 0.3s;
-            appearance: none; /* Hilangkan default arrow */
+            appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f97316' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -351,14 +393,12 @@
             cursor: pointer;
         }
 
-        /* Option styling */
         .form-select option {
-            background: #000 !important; /* Background hitam untuk semua option */
+            background: #000 !important;
             color: var(--light) !important;
             padding: 10px;
         }
 
-        /* Hover state untuk option */
         .form-select option:hover,
         .form-select option:focus,
         .form-select option:checked {
@@ -366,8 +406,6 @@
             color: white !important;
             text-shadow: 0 5px 15px rgba(249, 115, 22, 0.1);
         }
-
-        
 
         .form-btn {
             padding: 12px;
@@ -1360,6 +1398,10 @@
             .parallax-circle-3 {
                 display: none;
             }
+            
+            .fallback-title {
+                font-size: 3rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1376,17 +1418,26 @@
                 padding: 8px 16px;
                 font-size: 0.9rem;
             }
+            
+            .fallback-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
+    <!-- Loading Screen dengan Video Panzoid (14 detik) -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="banner">
-            <div class="content">
-                <div class="title" id="loadingTitle">PROJECTS</div>
-            </div>
-            <div class="mask-element" id="maskElement"></div>
+        <div class="video-container">
+            <video autoplay muted playsinline id="panzoidVideo">
+                <source src="assets/video.webm" type="video/webm">
+                <!-- Fallback jika video tidak bisa diputar -->
+                <div class="fallback-content">
+                    <h1 class="fallback-title">PROJECTS</h1>
+                    <div class="fallback-loader"></div>
+                </div>
+            </video>
+            <div class="loading-progress" id="loadingProgress">Loading: 0%</div>
         </div>
     </div>
 
@@ -1695,50 +1746,79 @@
     </div>
 
     <script>
-        // Loading Screen Script
+        // Loading Screen Script untuk Video Panzoid (14 detik)
         document.addEventListener('DOMContentLoaded', () => {
             const loadingScreen = document.getElementById('loadingScreen');
-            const maskElement = document.getElementById('maskElement');
-
-            // Reset mask animation
-            function resetMaskAnimation() {
-                // Hapus mask-image dulu
-                maskElement.style.maskImage = 'none';
-                maskElement.style.webkitMaskImage = 'none';
-                
-                // Force reflow
-                void maskElement.offsetWidth;
-                
-                // Set mask-image baru dengan timestamp untuk bypass cache
-                // Ganti dengan path ke file GIF ink_lv2.gif Anda
-                const timestamp = new Date().getTime();
-                const maskUrl = `ink_lv2.gif?${timestamp}`;
-                
-                maskElement.style.maskImage = `url(${maskUrl})`;
-                maskElement.style.webkitMaskImage = `url(${maskUrl})`;
-                maskElement.style.maskSize = 'cover';
-                maskElement.style.webkitMaskSize = 'cover';
-                maskElement.style.maskPosition = 'center';
-                maskElement.style.webkitMaskPosition = 'center';
+            const video = document.getElementById('panzoidVideo');
+            const fallbackContent = document.querySelector('.fallback-content');
+            const loadingProgress = document.getElementById('loadingProgress');
+            
+            // Durasi video: 14 detik
+            const VIDEO_DURATION = 14000; // 14 detik dalam milidetik
+            let videoLoaded = false;
+            let videoPlaying = false;
+            
+            // Update progress bar
+            function updateProgress(currentTime) {
+                if (video.duration) {
+                    const progress = (currentTime / video.duration) * 100;
+                    loadingProgress.textContent = `Loading: ${Math.round(progress)}%`;
+                }
             }
-
-            // Start loading animation
-            function startLoadingAnimation() {
-                // Reset mask animation
-                resetMaskAnimation();
+            
+            // Cek apakah video sudah dimuat
+            video.addEventListener('loadeddata', () => {
+                console.log('Video Panzoid loaded successfully!');
+                videoLoaded = true;
+                loadingProgress.style.display = 'block';
                 
-                // Auto complete after 2 seconds
-                setTimeout(completeLoading, 2000);
-            }
-
-            // Complete loading
+                // Update progress secara real-time
+                video.addEventListener('timeupdate', () => {
+                    updateProgress(video.currentTime);
+                });
+            });
+            
+            // Video mulai diputar
+            video.addEventListener('playing', () => {
+                console.log('Video started playing');
+                videoPlaying = true;
+            });
+            
+            // Saat video selesai diputar (14 detik)
+            video.addEventListener('ended', () => {
+                console.log('Video Panzoid finished playing! (14 seconds)');
+                completeLoading();
+            });
+            
+            // Fallback: jika video gagal dimuat
+            video.addEventListener('error', (e) => {
+                console.log('Video error:', e);
+                showFallback();
+            });
+            
+            // Progress checking untuk video yang lambat
+            setTimeout(() => {
+                if (!videoPlaying && !videoLoaded) {
+                    console.log('Video not loaded after 3 seconds, showing fallback');
+                    showFallback();
+                }
+            }, 3000);
+            
+            // Force complete setelah 16 detik (2 detik buffer)
+            setTimeout(() => {
+                if (!document.body.classList.contains('loaded')) {
+                    console.log('Force completing loading after 16 seconds...');
+                    completeLoading();
+                }
+            }, 16000);
+            
             function completeLoading() {
                 console.log("Loading complete!");
                 
-                // Final fade out loading screen
+                // Fade out loading screen dengan animasi
                 gsap.to(loadingScreen, {
                     opacity: 0,
-                    duration: 0.6,
+                    duration: 0.8,
                     ease: "power2.in",
                     onComplete: () => {
                         loadingScreen.style.display = 'none';
@@ -1749,16 +1829,24 @@
                     }
                 });
             }
-
-            // Start loading animation
-            startLoadingAnimation();
-
-            // Reset animation saat visibility change (untuk tab switch)
-            document.addEventListener('visibilitychange', function() {
-                if (!document.hidden && loadingScreen.style.display !== 'none') {
-                    setTimeout(resetMaskAnimation, 100);
-                }
-            });
+            
+            function showFallback() {
+                fallbackContent.style.display = 'block';
+                loadingProgress.style.display = 'none';
+                
+                // Simulasi progress untuk fallback
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 10;
+                    loadingProgress.textContent = `Loading: ${progress}%`;
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            completeLoading();
+                        }, 500);
+                    }
+                }, 300);
+            }
         });
 
         // ADMIN PASSWORD - Hanya kamu yang tahu
@@ -2869,23 +2957,19 @@
             });
         }
 
-        // Initialize
+        // Initialize select styling
         document.addEventListener('DOMContentLoaded', function() {
-            // Force dark background for select dropdowns
             const selects = document.querySelectorAll('.form-select');
             selects.forEach(select => {
-                // Set background color untuk semua option
                 Array.from(select.options).forEach(option => {
                     option.style.backgroundColor = '#000';
                     option.style.color = 'var(--light)';
                 });
                 
-                // Event untuk ketika dropdown dibuka
                 select.addEventListener('click', function() {
                     this.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
                 });
                 
-                // Event untuk ketika dropdown ditutup
                 select.addEventListener('blur', function() {
                     this.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
                 });
