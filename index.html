@@ -36,7 +36,6 @@
             line-height: 1.6;
         }
 
-        /* Parallax Background Elements */
         .parallax-bg {
             position: fixed;
             top: 0;
@@ -123,7 +122,6 @@
             }
         }
 
-        /* Floating Particles */
         .particles-container {
             position: fixed;
             width: 100%;
@@ -157,7 +155,6 @@
             }
         }
 
-        /* 3D Card Effect */
         .project-card {
             transform-style: preserve-3d;
             perspective: 1000px;
@@ -169,7 +166,6 @@
             transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Admin Panel Styles */
         .admin-panel {
             display: none;
             position: fixed;
@@ -468,7 +464,6 @@
             transform: rotate(15deg) scale(1.1);
         }
 
-        /* Password Modal */
         .password-modal {
             display: none;
             position: fixed;
@@ -557,7 +552,6 @@
             75% { transform: translateX(10px); }
         }
 
-        /* Stats khusus untuk local storage */
         .stats-item {
             padding: 15px;
             background: rgba(255, 255, 255, 0.03);
@@ -592,7 +586,6 @@
             padding: 0 20px;
         }
 
-        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -645,7 +638,6 @@
             text-shadow: 0 0 10px var(--primary-light);
         }
 
-        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -793,7 +785,6 @@
             }
         }
 
-        /* Introduction Section */
         .intro {
             padding: 120px 0 80px;
             position: relative;
@@ -893,7 +884,6 @@
             transform: translateY(-2px);
         }
 
-        /* Filter Section */
         .filter-section {
             padding: 60px 0 40px;
             text-align: center;
@@ -951,7 +941,6 @@
             transform: scale(1.05);
         }
 
-        /* Projects Grid */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -1121,7 +1110,6 @@
             transform: translateY(-2px);
         }
 
-        /* Stats Section */
         .stats {
             padding: 80px 0;
             text-align: center;
@@ -1144,7 +1132,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -1185,7 +1173,6 @@
             font-weight: 500;
         }
 
-        /* Footer */
         .footer {
             padding: 60px 0 40px;
             border-top: 1px solid var(--border);
@@ -1235,7 +1222,6 @@
             font-size: 0.9rem;
         }
 
-        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1360,7 +1346,6 @@
             color: var(--gray);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 3.5rem;
@@ -1408,7 +1393,6 @@
     </style>
 </head>
 <body>
-    <!-- Parallax Background -->
     <div class="parallax-bg">
         <div class="parallax-grid"></div>
         <div class="parallax-circle-1 parallax-element"></div>
@@ -1416,10 +1400,8 @@
         <div class="parallax-circle-3 parallax-element"></div>
     </div>
 
-    <!-- Floating Particles -->
     <div class="particles-container" id="particlesContainer"></div>
 
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
@@ -1428,7 +1410,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="container">
@@ -1449,7 +1430,6 @@
         </div>
     </section>
 
-    <!-- Introduction Section -->
     <section class="intro">
         <div class="intro-bg"></div>
         <div class="container">
@@ -1459,8 +1439,8 @@
                 <div class="intro-text">
                     <p>
                         This gallery represents a collection of <span class="highlight">creative solutions</span> and 
-                        <span class="highlight">technical implementations</span> that I've developed over time. 
-                        Each project tells a unique story of problem-solving, design thinking, and code craftsmanship.
+                        <span class="highlight">technical implementations</span> that I've developed over time, 
+                        including personal projects and academic work from school.
                     </p>
                     
                     <p>
@@ -1481,27 +1461,24 @@
         </div>
     </section>
 
-    <!-- Filter Section -->
     <section class="filter-section">
         <div class="container">
             <div class="filter">
                 <button class="filter-btn active" data-filter="all">All Projects</button>
                 <button class="filter-btn" data-filter="web">Web Applications</button>
                 <button class="filter-btn" data-filter="desktop">Desktop Apps</button>
+                <button class="filter-btn" data-filter="school">School Projects</button>
             </div>
         </div>
     </section>
 
-    <!-- Projects Grid -->
     <section class="projects">
         <div class="container">
             <div class="projects-grid" id="projectsGrid">
-                <!-- Projects will be dynamically inserted -->
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
     <section class="stats">
         <div class="stats-bg"></div>
         <div class="container">
@@ -1519,6 +1496,10 @@
                     <div class="stat-label">Desktop Apps</div>
                 </div>
                 <div class="stat-item">
+                    <div class="stat-number" id="schoolProjects">0</div>
+                    <div class="stat-label">School Projects</div>
+                </div>
+                <div class="stat-item">
                     <div class="stat-number" id="completedProjects">0</div>
                     <div class="stat-label">Completed</div>
                 </div>
@@ -1530,7 +1511,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-bg"></div>
         <div class="container">
@@ -1551,7 +1531,6 @@
         </div>
     </footer>
 
-    <!-- Download Modal -->
     <div class="modal-overlay" id="downloadModal">
         <div class="modal">
             <div class="modal-header">
@@ -1560,13 +1539,11 @@
             </div>
             <div class="modal-content">
                 <div class="download-options" id="downloadOptions">
-                    <!-- Options will be inserted here -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Password Modal -->
     <div class="password-modal" id="passwordModal">
         <div class="password-box">
             <h3 class="password-title">Admin Access</h3>
@@ -1580,19 +1557,16 @@
         </div>
     </div>
 
-    <!-- Admin Toggle Button -->
     <button class="admin-toggle" id="adminToggle">
         <i class="fas fa-cog"></i>
     </button>
 
-    <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
         <div class="admin-header">
             <h3 class="admin-title">Admin Panel</h3>
             <button class="admin-close" id="adminClose">&times;</button>
         </div>
 
-        <!-- Project Statistics -->
         <div class="admin-section">
             <h4 class="admin-section-title">
                 <i class="fas fa-chart-bar"></i>
@@ -1608,7 +1582,6 @@
             </div>
         </div>
 
-        <!-- Add/Edit New Project -->
         <div class="admin-section">
             <h4 class="admin-section-title" id="formTitle">
                 <i class="fas fa-plus-circle"></i>
@@ -1634,6 +1607,7 @@
                         <option value="">Select category</option>
                         <option value="web">Web Application</option>
                         <option value="desktop">Desktop Application</option>
+                        <option value="school">School Project</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -1678,18 +1652,15 @@
             </form>
         </div>
 
-        <!-- Manage Existing Projects -->
         <div class="admin-section">
             <h4 class="admin-section-title">
                 <i class="fas fa-list"></i>
                 Manage Projects
             </h4>
             <div class="project-list" id="projectList">
-                <!-- Projects will be loaded here -->
             </div>
         </div>
 
-        <!-- LocalStorage Controls -->
         <div class="admin-section">
             <h4 class="admin-section-title">
                 <i class="fas fa-database"></i>
@@ -1713,10 +1684,8 @@
     </div>
 
     <script>
-        // ADMIN PASSWORD - Hanya kamu yang tahu
         const ADMIN_PASSWORD = "galvinal227";
 
-        // Default project data
         const defaultProjects = [
             {
                 id: 1,
@@ -1791,10 +1760,34 @@
                 github: "https://github.com/galvinal-227",
                 demoUrl: "https://galvinal-227.github.io/WeatherDashboard/",
                 screenshot: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=400&h=250&fit=crop&q=80"
+            },
+            {
+                id: 7,
+                title: "Student Information System",
+                description: "Web-based application to manage student data, grades, and attendance. Developed as a final project for Database course.",
+                tags: ["PHP", "MySQL", "Bootstrap", "JavaScript"],
+                category: "school",
+                type: "web",
+                status: "completed",
+                github: "https://github.com/galvinal-227/sis-school",
+                demoUrl: "#",
+                screenshot: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=250&fit=crop&q=80"
+            },
+            {
+                id: 8,
+                title: "Science Lab Inventory",
+                description: "Desktop application for managing laboratory equipment and chemicals. Built for high school science department to track usage and stock.",
+                tags: ["Python", "Tkinter", "SQLite", "Inventory Management"],
+                category: "school",
+                type: "desktop",
+                status: "completed",
+                downloadLinks: {
+                    windows: "https://drive.google.com/file/d/1LabInventoryExample/view",
+                    source: "https://github.com/galvinal-227/lab-inventory"
+                }
             }
         ];
 
-        // DOM Elements
         const projectsGrid = document.getElementById('projectsGrid');
         const filterBtns = document.querySelectorAll('.filter-btn');
         const downloadModal = document.getElementById('downloadModal');
@@ -1803,11 +1796,11 @@
         const totalProjects = document.getElementById('totalProjects');
         const webProjects = document.getElementById('webProjects');
         const desktopProjects = document.getElementById('desktopProjects');
+        const schoolProjects = document.getElementById('schoolProjects');
         const completedProjects = document.getElementById('completedProjects');
         const inProgressProjects = document.getElementById('inProgressProjects');
         const particlesContainer = document.getElementById('particlesContainer');
         
-        // Admin Elements
         const adminToggle = document.getElementById('adminToggle');
         const adminPanel = document.getElementById('adminPanel');
         const adminClose = document.getElementById('adminClose');
@@ -1830,16 +1823,13 @@
         const submitBtn = document.getElementById('submitBtn');
         const cancelEditBtn = document.getElementById('cancelEditBtn');
 
-        // Variables
         let currentFilter = 'all';
         let isAdminAuthenticated = false;
         let projects = [];
         let isEditing = false;
 
-        // Initialize GSAP
         gsap.registerPlugin(ScrollTrigger);
 
-        // Create floating particles
         function createParticles() {
             const particleCount = 20;
             
@@ -1873,9 +1863,7 @@
             }
         }
 
-        // Initialize Parallax dengan GSAP
         function initializeParallax() {
-            // Animate parallax circles
             gsap.to('.parallax-circle-1', {
                 x: 100,
                 y: 100,
@@ -1903,7 +1891,6 @@
                 ease: "sine.inOut"
             });
             
-            // Parallax on scroll untuk hero elements
             gsap.to('.hero-subtitle', {
                 y: 30,
                 ease: "none",
@@ -1915,7 +1902,6 @@
                 }
             });
             
-            // Parallax untuk project cards
             gsap.utils.toArray('.project-card').forEach((card, i) => {
                 gsap.fromTo(card,
                     {
@@ -1938,7 +1924,6 @@
             });
         }
 
-        // Initialize LocalStorage
         function initializeLocalStorage() {
             const savedProjects = localStorage.getItem('projectGallery');
             
@@ -1951,21 +1936,18 @@
             }
         }
 
-        // Save projects to LocalStorage
         function saveProjectsToLocalStorage() {
             localStorage.setItem('projectGallery', JSON.stringify(projects));
             localStorage.setItem('projectGallery_lastUpdated', new Date().toLocaleString());
             updateLocalStorageStats();
         }
 
-        // Update LocalStorage statistics
         function updateLocalStorageStats() {
             localStorageCount.textContent = projects.length;
             const lastUpdate = localStorage.getItem('projectGallery_lastUpdated');
             lastUpdated.textContent = lastUpdate || 'Never';
         }
 
-        // Initialize
         function init() {
             initializeLocalStorage();
             createParticles();
@@ -1976,7 +1958,6 @@
             loadProjectList();
         }
 
-        // Render projects
         function renderProjects(filter = 'all') {
             projectsGrid.innerHTML = '';
             const filteredProjects = filter === 'all' 
@@ -1987,6 +1968,16 @@
                 const card = document.createElement('div');
                 card.className = 'project-card';
                 card.style.animationDelay = `${index * 0.1}s`;
+                
+                let badgeText = '';
+                if (project.category === 'school') {
+                    badgeText = 'School Project';
+                } else {
+                    badgeText = project.type === 'desktop' ? 'Desktop App' : 'Web App';
+                }
+                if (project.status === 'in-progress') {
+                    badgeText += ' • In Progress';
+                }
                 
                 card.innerHTML = `
                     <div class="project-card-inner">
@@ -1999,8 +1990,7 @@
                                 </div>
                             `}
                             <span class="project-badge">
-                                ${project.type === 'desktop' ? 'Desktop App' : 'Web App'}
-                                ${project.status === 'in-progress' ? ' • In Progress' : ''}
+                                ${badgeText}
                             </span>
                         </div>
                         <div class="project-content">
@@ -2044,7 +2034,6 @@
                 
                 projectsGrid.appendChild(card);
                 
-                // Setup card hover effect
                 card.addEventListener('mousemove', (e) => {
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
@@ -2065,22 +2054,21 @@
             });
         }
 
-        // Update statistics
         function updateStats() {
             const webCount = projects.filter(p => p.category === 'web').length;
             const desktopCount = projects.filter(p => p.category === 'desktop').length;
+            const schoolCount = projects.filter(p => p.category === 'school').length;
             const completedCount = projects.filter(p => p.status === 'completed').length;
             const inProgressCount = projects.filter(p => p.status === 'in-progress').length;
             
-            // Animate counters
             animateCounter(totalProjects, projects.length);
             animateCounter(webProjects, webCount);
             animateCounter(desktopProjects, desktopCount);
+            animateCounter(schoolProjects, schoolCount);
             animateCounter(completedProjects, completedCount);
             animateCounter(inProgressProjects, inProgressCount);
         }
 
-        // Animate number counter
         function animateCounter(element, target, duration = 1500) {
             const start = 0;
             const increment = target / (duration / 16);
@@ -2097,7 +2085,6 @@
             }, 16);
         }
 
-        // Show download modal
         function showDownloadModal(projectId) {
             const project = projects.find(p => p.id == projectId);
             if (!project || !project.downloadLinks) return;
@@ -2131,14 +2118,12 @@
             document.body.style.overflow = 'hidden';
         }
 
-        // Download file
         function downloadFile(url) {
             window.open(url, '_blank');
             downloadModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
-        // Load project list for admin panel
         function loadProjectList() {
             projectList.innerHTML = '';
             
@@ -2160,7 +2145,6 @@
             });
         }
 
-        // Edit project function
         function editProject(projectId) {
             const project = projects.find(p => p.id == projectId);
             if (!project) return;
@@ -2196,7 +2180,6 @@
             cancelEditBtn.style.display = 'block';
         }
 
-        // Cancel edit
         function cancelEdit() {
             isEditing = false;
             
@@ -2209,7 +2192,6 @@
             cancelEditBtn.style.display = 'none';
         }
 
-        // Add or update project
         function saveProject() {
             const projectData = {
                 title: document.getElementById('projectTitle').value,
@@ -2263,7 +2245,6 @@
             cancelEdit();
         }
 
-        // Show success message
         function showSuccessMessage(message) {
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = `<i class="fas fa-check"></i> ${message}`;
@@ -2275,7 +2256,6 @@
             }, 2000);
         }
 
-        // Delete project
         function deleteProject(projectId) {
             if (confirm('Are you sure you want to delete this project?')) {
                 projects = projects.filter(p => p.id != projectId);
@@ -2290,7 +2270,6 @@
             }
         }
 
-        // Export projects
         function exportProjectsToFile() {
             const dataStr = JSON.stringify(projects, null, 2);
             const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
@@ -2303,7 +2282,6 @@
             linkElement.click();
         }
 
-        // Import projects
         function importProjectsFromFile() {
             const input = document.createElement('input');
             input.type = 'file';
@@ -2333,9 +2311,7 @@
             input.click();
         }
 
-        // Setup event listeners
         function setupEventListeners() {
-            // Filter buttons
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     filterBtns.forEach(b => b.classList.remove('active'));
@@ -2347,7 +2323,6 @@
                 });
             });
             
-            // Download buttons
             document.addEventListener('click', (e) => {
                 if (e.target.classList.contains('download-btn') || 
                     e.target.closest('.download-btn')) {
@@ -2358,13 +2333,11 @@
                 }
             });
             
-            // Close modal
             closeModal.addEventListener('click', () => {
                 downloadModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             });
             
-            // Close modal on overlay click
             downloadModal.addEventListener('click', (e) => {
                 if (e.target === downloadModal) {
                     downloadModal.style.display = 'none';
@@ -2372,7 +2345,6 @@
                 }
             });
             
-            // Admin toggle
             adminToggle.addEventListener('click', () => {
                 if (!isAdminAuthenticated) {
                     passwordModal.classList.add('active');
@@ -2381,12 +2353,10 @@
                 }
             });
             
-            // Admin close
             adminClose.addEventListener('click', () => {
                 adminPanel.classList.remove('active');
             });
             
-            // Password submit
             passwordSubmit.addEventListener('click', () => {
                 if (passwordInput.value === ADMIN_PASSWORD) {
                     isAdminAuthenticated = true;
@@ -2400,14 +2370,12 @@
                 }
             });
             
-            // Password input enter key
             passwordInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     passwordSubmit.click();
                 }
             });
             
-            // Category change
             projectCategory.addEventListener('change', (e) => {
                 if (e.target.value === 'web') {
                     webFields.style.display = 'block';
@@ -2415,10 +2383,12 @@
                 } else if (e.target.value === 'desktop') {
                     webFields.style.display = 'none';
                     desktopFields.style.display = 'block';
+                } else if (e.target.value === 'school') {
+                    webFields.style.display = 'block';
+                    desktopFields.style.display = 'none';
                 }
             });
             
-            // Type change
             document.getElementById('projectType').addEventListener('change', (e) => {
                 if (e.target.value === 'web') {
                     webFields.style.display = 'block';
@@ -2429,16 +2399,13 @@
                 }
             });
             
-            // Add/edit project form
             addProjectForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 saveProject();
             });
             
-            // Cancel edit button
             cancelEditBtn.addEventListener('click', cancelEdit);
             
-            // Project list actions
             projectList.addEventListener('click', (e) => {
                 if (e.target.classList.contains('edit-btn') || 
                     e.target.closest('.edit-btn')) {
@@ -2457,13 +2424,10 @@
                 }
             });
             
-            // Export projects
             exportProjects.addEventListener('click', exportProjectsToFile);
             
-            // Import projects
             importProjects.addEventListener('click', importProjectsFromFile);
             
-            // Reset projects
             resetProjects.addEventListener('click', () => {
                 if (confirm('This will reset all projects to default. Are you sure?')) {
                     localStorage.removeItem('projectGallery');
@@ -2482,7 +2446,6 @@
             });
         }
 
-        // Initialize
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
