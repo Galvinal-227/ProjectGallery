@@ -161,6 +161,7 @@
             transform-style: preserve-3d;
             perspective: 1000px;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .project-card-inner {
@@ -173,7 +174,7 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 380px;
+            width: 420px;
             height: 100vh;
             background: rgba(0, 0, 0, 0.95);
             border-left: 1px solid var(--border);
@@ -194,13 +195,13 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             background: var(--gradient);
             border: none;
             border-radius: 50%;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
             z-index: 1002;
             display: flex;
@@ -432,6 +433,11 @@
         .form-btn:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow);
+        }
+
+        .form-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         .project-list {
@@ -967,10 +973,11 @@
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s ease;
             opacity: 0;
             transform: translateY(30px);
             animation: cardFadeIn 0.6s ease forwards;
+            cursor: pointer;
         }
 
         @keyframes cardFadeIn {
@@ -981,13 +988,9 @@
         }
 
         .project-card:hover {
-            transform: translateY(-8px) rotateX(2deg) rotateY(2deg);
-            box-shadow: var(--shadow);
-            border-color: var(--primary);
-        }
-
-        .project-card:hover .project-image img {
-            transform: scale(1.1) rotate(1deg);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.15);
+            border-color: rgba(249, 115, 22, 0.3);
         }
 
         .project-image {
@@ -1000,7 +1003,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
         }
 
         .project-badge {
@@ -1075,6 +1082,7 @@
         .project-actions {
             display: flex;
             gap: 12px;
+            pointer-events: auto;
         }
 
         .btn {
@@ -1089,6 +1097,9 @@
             transition: all 0.3s;
             flex: 1;
             justify-content: center;
+            pointer-events: auto;
+            position: relative;
+            z-index: 10;
         }
 
         .btn-primary {
@@ -1100,16 +1111,6 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
-            animation: buttonGlow 1s infinite alternate;
-        }
-
-        @keyframes buttonGlow {
-            from {
-                box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
-            }
-            to {
-                box-shadow: 0 8px 25px rgba(249, 115, 22, 0.5);
-            }
         }
 
         .btn-secondary {
@@ -1156,7 +1157,7 @@
         }
 
         .stat-item:hover {
-            transform: translateY(-10px) scale(1.05);
+            transform: translateY(-10px);
         }
 
         .stat-number {
@@ -1254,8 +1255,10 @@
         .modal {
             background: var(--dark);
             border-radius: 12px;
-            max-width: 500px;
-            width: 100%;
+            max-width: 900px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
             border: 1px solid var(--border);
             animation: modalSlide 0.3s ease;
         }
@@ -1272,15 +1275,19 @@
         }
 
         .modal-header {
-            padding: 24px;
+            padding: 20px 24px;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            background: var(--dark);
+            z-index: 10;
         }
 
         .modal-title {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--light);
         }
@@ -1289,10 +1296,10 @@
             background: transparent;
             border: none;
             color: var(--gray);
-            font-size: 1.5rem;
+            font-size: 2rem;
             cursor: pointer;
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1303,10 +1310,78 @@
         .modal-close:hover {
             background: rgba(136, 136, 136, 0.1);
             transform: rotate(90deg);
+            color: var(--primary);
         }
 
         .modal-content {
             padding: 24px;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .modal-description {
+            font-size: 1.1rem;
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .modal-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .modal-tech-tag {
+            padding: 8px 16px;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary-light);
+        }
+
+        .modal-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+        }
+
+        .modal-detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .modal-detail-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-detail-value {
+            font-size: 1rem;
+            color: var(--light);
+            font-weight: 500;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
         }
 
         .download-options {
@@ -1373,6 +1448,32 @@
             to { transform: rotate(360deg); }
         }
 
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            animation: slideInRight 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 3.5rem;
@@ -1399,6 +1500,10 @@
             .parallax-circle-2,
             .parallax-circle-3 {
                 display: none;
+            }
+
+            .modal-actions {
+                flex-direction: column;
             }
         }
 
@@ -1561,6 +1666,14 @@
         </div>
     </footer>
 
+    <!-- Modal Detail Project -->
+    <div class="modal-overlay" id="projectDetailModal">
+        <div class="modal" id="projectDetailContent">
+            <!-- Content akan diisi via JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal Download -->
     <div class="modal-overlay" id="downloadModal">
         <div class="modal">
             <div class="modal-header">
@@ -1829,6 +1942,8 @@
         const downloadModal = document.getElementById('downloadModal');
         const closeModal = document.getElementById('closeModal');
         const downloadOptions = document.getElementById('downloadOptions');
+        const projectDetailModal = document.getElementById('projectDetailModal');
+        const projectDetailContent = document.getElementById('projectDetailContent');
         const totalProjects = document.getElementById('totalProjects');
         const webProjects = document.getElementById('webProjects');
         const desktopProjects = document.getElementById('desktopProjects');
@@ -1866,6 +1981,7 @@
         let isAdminAuthenticated = false;
         let projects = [];
         let isEditing = false;
+        let isSaving = false;
 
         gsap.registerPlugin(ScrollTrigger);
 
@@ -1942,6 +2058,19 @@
             });
         }
 
+        // --- UTILITY FUNCTIONS ---
+        function showSuccessMessage(message) {
+            const toast = document.createElement('div');
+            toast.className = 'success-message';
+            toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
         // --- SUPABASE FUNCTIONS ---
         async function loadProjectsFromSupabase() {
             try {
@@ -1970,7 +2099,11 @@
         }
 
         async function saveProjectToSupabase(projectData) {
+            if (isSaving) return;
+            
             try {
+                isSaving = true;
+                submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
                 
                 if (isEditing && editProjectId.value) {
@@ -1980,6 +2113,7 @@
                         .eq('id', editProjectId.value);
                     
                     if (error) throw error;
+                    
                     showSuccessMessage('Project updated successfully!');
                 } else {
                     const { error } = await supabaseClient
@@ -1987,14 +2121,20 @@
                         .insert([projectData]);
                     
                     if (error) throw error;
+                    
                     showSuccessMessage('Project added successfully!');
                 }
                 
+                // Reset form and reload data
                 await loadProjectsFromSupabase();
                 cancelEdit();
+                
             } catch (error) {
                 console.error('Error saving project:', error);
                 alert('Error saving project: ' + error.message);
+            } finally {
+                isSaving = false;
+                submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Project to Supabase';
             }
         }
@@ -2012,6 +2152,8 @@
                 if (isEditing && parseInt(editProjectId.value) === parseInt(projectId)) {
                     cancelEdit();
                 }
+                
+                showSuccessMessage('Project deleted successfully!');
             } catch (error) {
                 console.error('Error deleting project:', error);
                 alert('Error deleting project: ' + error.message);
@@ -2022,6 +2164,7 @@
             if (!confirm('This will add default projects to your database. Continue?')) return;
             
             try {
+                seedDefaultProjects.disabled = true;
                 seedDefaultProjects.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Seeding...';
                 
                 for (const project of defaultProjects) {
@@ -2033,11 +2176,12 @@
                 }
                 
                 await loadProjectsFromSupabase();
-                alert('Default projects added successfully!');
+                showSuccessMessage('Default projects added successfully!');
             } catch (error) {
                 console.error('Error seeding projects:', error);
                 alert('Error seeding projects: ' + error.message);
             } finally {
+                seedDefaultProjects.disabled = false;
                 seedDefaultProjects.innerHTML = '<i class="fas fa-seedling"></i> Seed Default';
             }
         }
@@ -2047,6 +2191,7 @@
             if (!confirm('This action cannot be undone. Type "DELETE" to confirm.')) return;
             
             try {
+                resetProjects.disabled = true;
                 resetProjects.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
                 
                 const { error } = await supabaseClient
@@ -2057,13 +2202,94 @@
                 if (error) throw error;
                 
                 await loadProjectsFromSupabase();
-                alert('All projects deleted successfully!');
+                showSuccessMessage('All projects deleted successfully!');
             } catch (error) {
                 console.error('Error deleting projects:', error);
                 alert('Error deleting projects: ' + error.message);
             } finally {
+                resetProjects.disabled = false;
                 resetProjects.innerHTML = '<i class="fas fa-trash"></i> Delete All Projects';
             }
+        }
+
+        // --- MODAL FUNCTIONS ---
+        function showProjectDetail(project) {
+            const tags = Array.isArray(project.tags) ? project.tags : 
+                        (typeof project.tags === 'string' ? JSON.parse(project.tags) : []);
+            
+            const categoryMap = {
+                'web': 'Web Application',
+                'desktop': 'Desktop Application',
+                'school': 'School Project'
+            };
+            
+            const statusMap = {
+                'completed': '✅ Completed',
+                'in-progress': '🔄 In Progress',
+                'planned': '📅 Planned'
+            };
+            
+            projectDetailContent.innerHTML = `
+                <div class="modal-header">
+                    <h3 class="modal-title">${project.title}</h3>
+                    <button class="modal-close" onclick="document.getElementById('projectDetailModal').style.display='none'">&times;</button>
+                </div>
+                <div class="modal-content">
+                    ${project.screenshot ? `
+                        <img src="${project.screenshot}" alt="${project.title}" class="modal-image">
+                    ` : ''}
+                    
+                    <p class="modal-description">${project.description}</p>
+                    
+                    <div class="modal-tech">
+                        ${tags.map(tag => `<span class="modal-tech-tag">${tag}</span>`).join('')}
+                    </div>
+                    
+                    <div class="modal-details">
+                        <div class="modal-detail-item">
+                            <span class="modal-detail-label">Category</span>
+                            <span class="modal-detail-value">${categoryMap[project.category] || project.category}</span>
+                        </div>
+                        <div class="modal-detail-item">
+                            <span class="modal-detail-label">Type</span>
+                            <span class="modal-detail-value">${project.type === 'web' ? '🌐 Web App' : '💻 Desktop App'}</span>
+                        </div>
+                        <div class="modal-detail-item">
+                            <span class="modal-detail-label">Status</span>
+                            <span class="modal-detail-value">${statusMap[project.status] || project.status}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        ${project.type === 'desktop' ? `
+                            ${project.downloadLinks?.windows ? `
+                                <a href="${project.downloadLinks.windows}" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            ` : ''}
+                            ${project.downloadLinks?.source ? `
+                                <a href="${project.downloadLinks.source}" class="btn btn-secondary" target="_blank">
+                                    <i class="fab fa-github"></i> Source Code
+                                </a>
+                            ` : ''}
+                        ` : `
+                            ${project.demoUrl ? `
+                                <a href="${project.demoUrl}" class="btn btn-primary" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            ` : ''}
+                            ${project.github ? `
+                                <a href="${project.github}" class="btn btn-secondary" target="_blank">
+                                    <i class="fab fa-github"></i> GitHub
+                                </a>
+                            ` : ''}
+                        `}
+                    </div>
+                </div>
+            `;
+            
+            projectDetailModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         // --- RENDER FUNCTIONS ---
@@ -2112,35 +2338,36 @@
                         </div>
                         <div class="project-content">
                             <h3 class="project-title">${project.title}</h3>
-                            <p class="project-description">${project.description}</p>
+                            <p class="project-description">${project.description.substring(0, 100)}${project.description.length > 100 ? '...' : ''}</p>
                             
                             <div class="project-tech">
-                                ${tags.map(tag => `
+                                ${tags.slice(0, 3).map(tag => `
                                     <span class="tech-tag">${tag}</span>
                                 `).join('')}
+                                ${tags.length > 3 ? `<span class="tech-tag">+${tags.length - 3}</span>` : ''}
                             </div>
                             
                             <div class="project-actions">
                                 ${project.type === 'desktop' ? `
-                                    <button class="btn btn-primary download-btn" data-id="${project.id}">
+                                    <button class="btn btn-primary download-btn" data-id="${project.id}" onclick="event.stopPropagation()">
                                         <i class="fas fa-download"></i>
                                         Download
                                     </button>
                                     ${project.downloadLinks?.source ? `
-                                        <a href="${project.downloadLinks.source}" class="btn btn-secondary" target="_blank">
+                                        <a href="${project.downloadLinks.source}" class="btn btn-secondary" target="_blank" onclick="event.stopPropagation()">
                                             <i class="fab fa-github"></i>
-                                            Source Code
+                                            Code
                                         </a>
                                     ` : ''}
                                 ` : `
-                                    <a href="${project.demoUrl || project.link}" class="btn btn-primary" target="_blank">
+                                    <a href="${project.demoUrl || project.link}" class="btn btn-primary" target="_blank" onclick="event.stopPropagation()">
                                         <i class="fas fa-external-link-alt"></i>
-                                        Live Demo
+                                        Demo
                                     </a>
                                     ${project.github ? `
-                                        <a href="${project.github}" class="btn btn-secondary" target="_blank">
+                                        <a href="${project.github}" class="btn btn-secondary" target="_blank" onclick="event.stopPropagation()">
                                             <i class="fab fa-github"></i>
-                                            GitHub
+                                            Code
                                         </a>
                                     ` : ''}
                                 `}
@@ -2149,22 +2376,16 @@
                     </div>
                 `;
                 
+                // Add click event for detail modal
+                card.addEventListener('click', (e) => {
+                    // Don't open modal if clicking on buttons or links
+                    if (e.target.closest('.btn') || e.target.closest('.download-btn')) {
+                        return;
+                    }
+                    showProjectDetail(project);
+                });
+                
                 projectsGrid.appendChild(card);
-                
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateY = ((x - centerX) / centerX) * 5;
-                    const rotateX = ((centerY - y) / centerY) * -5;
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-                });
             });
             
             // Re-run GSAP animations for new cards
@@ -2237,7 +2458,7 @@
                     </div>
                     <div class="option-content">
                         <div class="option-title">Source Code</div>
-                        <div class="option-desc">Complete Python source files</div>
+                        <div class="option-desc">Complete source files</div>
                     </div>
                     <i class="fas fa-external-link-alt" style="color: var(--primary);"></i>
                 </div>
@@ -2324,16 +2545,6 @@
             projectScreenshotUrl.value = '';
         }
 
-        function showSuccessMessage(message) {
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = `<i class="fas fa-check"></i> ${message}`;
-            submitBtn.style.background = '#10b981';
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.style.background = '';
-            }, 2000);
-        }
-
         // --- EVENT LISTENERS ---
         function setupEventListeners() {
             filterBtns.forEach(btn => {
@@ -2349,6 +2560,8 @@
                 if (e.target.classList.contains('download-btn') || e.target.closest('.download-btn')) {
                     const btn = e.target.classList.contains('download-btn') ? e.target : e.target.closest('.download-btn');
                     const projectId = btn.dataset.id;
+                    e.preventDefault();
+                    e.stopPropagation();
                     showDownloadModal(projectId);
                 }
             });
@@ -2361,6 +2574,13 @@
             downloadModal.addEventListener('click', (e) => {
                 if (e.target === downloadModal) {
                     downloadModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            projectDetailModal.addEventListener('click', (e) => {
+                if (e.target === projectDetailModal) {
+                    projectDetailModal.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 }
             });
@@ -2433,6 +2653,8 @@
             addProjectForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
+                if (isSaving) return;
+                
                 const projectData = {
                     title: document.getElementById('projectTitle').value,
                     description: document.getElementById('projectDescription').value,
@@ -2444,12 +2666,12 @@
                 };
                 
                 if (projectData.type === 'web') {
-                    projectData.github = document.getElementById('projectGithubUrl').value;
-                    projectData.demoUrl = document.getElementById('projectDemoUrl').value;
+                    projectData.github = document.getElementById('projectGithubUrl').value || null;
+                    projectData.demoUrl = document.getElementById('projectDemoUrl').value || null;
                 } else {
                     projectData.downloadLinks = {
-                        windows: document.getElementById('projectDownloadUrl').value,
-                        source: document.getElementById('projectSourceUrl').value
+                        windows: document.getElementById('projectDownloadUrl').value || null,
+                        source: document.getElementById('projectSourceUrl').value || null
                     };
                 }
                 
@@ -2489,9 +2711,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', init);
-        
-        // Make download function global for onclick
-        window.showDownloadModal = showDownloadModal;
     </script>
 </body>
 </html>
